@@ -29,7 +29,7 @@ RUN sed -e "/^\s*location \/.*/i\ \ \ \ location ${CHART_DIR} {%\
 \ \ \ \ \ \ \ \ alias  ${CHART_DIR};%\
 \ \ \ \ \ \ \ \ index  index.yaml index.yml;%\
 \ \ \ \ }%\
-" /etc/nginx/conf.d/default.conf | tr "%" "\n" > /etc/nginx/conf.d/default.conf
+" /etc/nginx/conf.d/default.conf | tr "%" "\n" > /etc/nginx/conf.d/default2.conf
 VOLUME ${CHART_DIR}
 
 # INGRESS_SUBDOMAIN = URL used for hosted Chart
