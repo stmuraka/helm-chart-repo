@@ -24,6 +24,7 @@ RUN chmod 700 get_helm.sh \
 ENV CHART_DIR="/charts"
 RUN mkdir -p ${CHART_DIR}
 RUN helm repo index ${CHART_DIR}
+RUN cp /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
 RUN sed -e "/^\s*location \/.*/i\ \ \ \ location ${CHART_DIR} {%\
 \ \ \ \ \ \ \ \ alias  ${CHART_DIR};%\
 \ \ \ \ \ \ \ \ index  index.yaml index.yml;%\
