@@ -30,6 +30,7 @@ RUN sed -e "/^\s*location \/.*/i\ \ \ \ location ${CHART_DIR} {%\
 \ \ \ \ \ \ \ \ index  index.yaml index.yml;%\
 \ \ \ \ }%\
 " /etc/nginx/conf.d/default.conf | tr "%" "\n" > /etc/nginx/conf.d/default.new
+# Add extra mv step to avoid race condition on dockerhub build
 RUN mv /etc/nginx/conf.d/default.new /etc/nginx/conf.d/default.conf
 VOLUME ${CHART_DIR}
 
