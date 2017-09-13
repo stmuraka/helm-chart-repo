@@ -17,5 +17,5 @@ nginx
 # Generate helm index.yaml each time the chart directory changes
 #while inotifywait -r -qq -e modify,move,create,delete /usr/share/nginx/html/charts; do
 while inotifywait -r -q -e modify,move,create,delete ${CHART_DIR}; do
-    helm repo index ${CHART_DIR} --url http://${INGRESS_SUBDOMAIN}/charts/
+    helm repo index ${CHART_DIR} --url https://${INGRESS_SUBDOMAIN}/charts/
 done
