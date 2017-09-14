@@ -10,6 +10,13 @@ _sig() {
 
 trap _sig SIGHUP SIGINT SIGTERM
 
+generate_repo_index() {
+    helm repo index ${CHART_DIR} --url https://${INGRESS_SUBDOMAIN}/charts/
+}
+
+echo "Initializing the Helm repo index file"
+generate_repo_index
+
 echo "Starting Nginx..."
 #nginx -g "daemon on;"
 nginx
@@ -17,5 +24,5 @@ nginx
 # Generate helm index.yaml each time the chart directory changes
 #while inotifywait -r -qq -e modify,move,create,delete /usr/share/nginx/html/charts; do
 while inotifywait -r -q -e modify,move,create,delete ${CHART_DIR}; do
-    helm repo index ${CHART_DIR} --url https://${INGRESS_SUBDOMAIN}/charts/
+    generate_repo_index
 done
