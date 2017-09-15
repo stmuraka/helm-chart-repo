@@ -11,7 +11,9 @@ _sig() {
 trap _sig SIGHUP SIGINT SIGTERM
 
 generate_repo_index() {
-    helm repo index ${CHART_DIR} --url https://${INGRESS_SUBDOMAIN}/charts/
+    helm repo index ${CHART_DIR} --url https://${INGRESS_SUBDOMAIN}/charts/ \
+        && echo "Helm index.yaml regenerated" \
+        || echo "Helm index.yaml regeneration FAILED"
 }
 
 echo "Initializing the Helm repo index file"
